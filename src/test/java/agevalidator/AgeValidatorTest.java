@@ -3,13 +3,14 @@ package agevalidator;
 import org.testng.Assert;
 import org.testng.annotations.Test;
 
+import java.time.LocalDate;
 import java.time.ZonedDateTime;
 
 public class AgeValidatorTest {
     @Test
     public void becameEighteenYesterdayIsAdult(){
         //arrange
-        ZonedDateTime birthDate = ZonedDateTime.now().minusYears(18).minusDays(1);
+        LocalDate birthDate = LocalDate.now().minusYears(18).minusDays(1);
         //act
         boolean isAdult = AgeValidator.isAdult(birthDate);
         //assert
@@ -19,7 +20,7 @@ public class AgeValidatorTest {
     @Test
     public void becameEighteenTodayIsAdult(){
         //arrange
-        ZonedDateTime birthDate = ZonedDateTime.now().minusYears(18);
+        LocalDate birthDate = LocalDate.now().minusYears(18);
         //act
         boolean isAdult = AgeValidator.isAdult(birthDate);
         //assert
@@ -29,7 +30,7 @@ public class AgeValidatorTest {
     @Test
     public void willBecomeEighteenTomorrowIsNotAdult(){
         //arrange
-        ZonedDateTime birthDate = ZonedDateTime.now().minusYears(18).plusDays(1);
+        LocalDate birthDate = LocalDate.now().minusYears(18).plusDays(1);
         //act
         boolean isAdult = AgeValidator.isAdult(birthDate);
         //assert
@@ -39,7 +40,7 @@ public class AgeValidatorTest {
     @Test(expectedExceptions = IllegalArgumentException.class)
     public void passingNullWillThrowException(){
         //arrange
-        ZonedDateTime birthDate = ZonedDateTime.now().plusDays(1);
+        LocalDate birthDate = LocalDate.now().plusDays(1);
         //act
         boolean isAdult = AgeValidator.isAdult(birthDate);
     }
@@ -47,7 +48,7 @@ public class AgeValidatorTest {
     @Test(expectedExceptions = IllegalArgumentException.class)
     public void passingFutureDateWillThrowException(){
         //arrange
-        ZonedDateTime birthDate = null;
+        LocalDate birthDate = null;
         //act
         boolean isAdult = AgeValidator.isAdult(birthDate);
     }
